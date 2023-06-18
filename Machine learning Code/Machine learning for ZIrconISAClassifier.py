@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, f1_score, roc_curve, auc, roc_auc_score, classification_report
 from sklearn.pipeline import Pipeline
 from joblib import dump, load
-from sklearn.preprocessing import StandardScaler, PowerTransf
+from sklearn.preprocessing import StandardScaler, PowerTransformer
 ''' Python code for predicting the source rocks of detrital zircons using trace elements.
 
 This code can be used to reproduce the results shown in Zhong et al.(2023) published in Contributions to Mineralogy and
@@ -86,3 +86,22 @@ yru_val_pred_mlp = mlp.predict(x_val)
 print(classification_report(y_val, yru_val_pred_svm))
 print(classification_report(y_val, yru_val_pred_rf))
 print(classification_report(y_val, yru_val_pred_mlp))
+# # zjw test svm
+# print(svm.predict(scaleru.transform(np.log10([[40.4,1.2,26.1,3.3,0.7,619.4,1111.4,0.6,3.6,688.0,0.4]])))) # I type 0
+# print(svm.predict(scaleru.transform(np.log10([[1.4,0.2,42.7,0.6,0.6,40.4,237.4,0.2,0.4,277.9,0.1 ]])))) # S type 1
+# print(svm.predict(scaleru.transform(np.log10([[31.9,0.3,36.2,9.4,5.6,585.3,944.8,0.6,2.1,413.5,0.1 ]])))) # A type 2
+# #zjw test rf
+# print(rf.predict(scaleru.transform(np.log10([[40.4,1.2,26.1,3.3,0.7,619.4,1111.4,0.6,3.6,688.0,0.4]])))) # I type 0
+# print(rf.predict(scaleru.transform(np.log10([[1.4,0.2,42.7,0.6,0.6,40.4,237.4,0.2,0.4,277.9,0.1 ]])))) # S type 1
+# print(rf.predict(scaleru.transform(np.log10([[31.9,0.3,36.2,9.4,5.6,585.3,944.8,0.6,2.1,413.5,0.1 ]])))) # A type 2
+# #zjw test rmlp
+# print(mlp.predict(scaleru.transform(np.log10([[40.4,1.2,26.1,3.3,0.7,619.4,1111.4,0.6,3.6,688.0,0.4]])))) # I type 0
+# print(mlp.predict(scaleru.transform(np.log10([[1.4,0.2,42.7,0.6,0.6,40.4,237.4,0.2,0.4,277.9,0.1 ]])))) # S type 1
+# print(mlp.predict(scaleru.transform(np.log10([[31.9,0.3,36.2,9.4,5.6,585.3,944.8,0.6,2.1,413.5,0.1 ]])))) # A type 2
+# # 绘制混淆矩阵
+# plot_matrix(y_val, yru_val_pred_svm, [0, 1, 2], title='confusion_matrix_svc',
+#             axis_labels=['I', 'S', 'A'])# svm
+# plot_matrix(y_val, yru_val_pred_rf, [0, 1, 2], title='confusion_matrix_svc',
+#             axis_labels=['I', 'S', 'A'])# rf
+# plot_matrix(y_val, yru_val_pred_mlp, [0, 1, 2], title='confusion_matrix_svc',
+#             axis_labels=['I', 'S', 'A'])# mlp
